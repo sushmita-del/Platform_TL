@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform — Tradelab | OMS, Trading Platform, KYC & Exchange Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:#111;background:#fff;line-height:1.6;overflow-x:hidden}
+:root{
+  --red:#C91C1C;--red2:#A01515;--redbg:#FDF2F2;--redborder:rgba(201,28,28,.18);
+  --green:#2ECC40;--greendark:#20A030;--greenbg:rgba(46,204,64,.09);--greenborder:rgba(46,204,64,.28);
+  --ink:#111111;--ink2:#1C1917;
+  --g50:#F7F6F5;--g100:#EDEBE9;--g200:#D5D2CE;--g300:#B5B1AC;--g400:#8E8A84;--g500:#6B6763;--g700:#3D3A36;
+  --r:8px;--rl:14px;--rx:20px;--max:1180px;--pad:48px;
+}
+.nav{position:sticky;top:0;z-index:500;height:64px;display:flex;align-items:center;gap:28px;padding:0 var(--pad);background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--g100)}
+.logo{font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:var(--red);letter-spacing:-.5px;flex-shrink:0}
+.nav-links{display:flex;gap:2px}
+.na{font-size:13.5px;font-weight:500;color:var(--g500);padding:6px 12px;border-radius:6px;transition:.15s;text-decoration:none}
+.na:hover,.na.act{color:var(--red);background:var(--redbg)}
+.nav-r{margin-left:auto;display:flex;gap:8px}
+.btn-g{font-size:13px;font-weight:600;color:var(--g700);border:1.5px solid var(--g200);padding:7px 18px;border-radius:var(--r);transition:.15s;text-decoration:none}
+.btn-g:hover{border-color:var(--g300)}
+.btn-r{font-size:13.5px;font-weight:700;color:#fff;background:var(--red);padding:8px 22px;border-radius:var(--r);transition:.15s;text-decoration:none}
+.btn-r:hover{background:var(--red2)}
+
+/* SUBNAV — Whatfix-style sticky product tab bar */
+.subnav{position:sticky;top:64px;z-index:400;background:#fff;border-bottom:2px solid var(--g100)}
+.subnav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;overflow-x:auto;scrollbar-width:none}
+.subnav-wrap::-webkit-scrollbar{display:none}
+.snav{display:flex;align-items:center;gap:8px;padding:15px 20px;font-size:13.5px;font-weight:600;color:var(--g400);border-bottom:2.5px solid transparent;margin-bottom:-2px;cursor:pointer;transition:.15s;white-space:nowrap}
+.snav svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.snav:hover{color:var(--ink)}
+.snav.act{color:var(--red);border-bottom-color:var(--red)}
+
+/* PRODUCT PAGES */
+.pp{display:none}.pp.act{display:block}
+
+/* HERO */
+.hero{background:var(--g50);padding:72px var(--pad) 0;overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;top:-60px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--redbg),transparent 65%);pointer-events:none}
+.hero-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:flex-end}
+.h-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--g200);border-radius:40px;padding:5px 14px 5px 6px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.h-badge-p{background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.h-badge-t{font-size:12.5px;font-weight:500;color:var(--g500)}
+h1.hh{font-family:'Inter',sans-serif;font-size:clamp(30px,3.2vw,48px);font-weight:800;line-height:1.1;letter-spacing:-.5px;color:var(--ink);margin-bottom:18px}
+h1.hh em{font-style:italic;color:var(--red)}
+.h-lead{font-size:17px;font-weight:300;color:var(--g500);line-height:1.78;margin-bottom:28px;max-width:460px}
+.h-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.h-ctas .btn-r{font-size:14.5px;padding:12px 26px}
+.h-ctas .btn-g{font-size:14px;padding:11px 20px}
+.h-stats{display:flex;gap:24px;padding-top:22px;border-top:1px solid var(--g200);flex-wrap:wrap}
+.hs-val{font-family:'Inter',sans-serif;font-size:23px;font-weight:800;color:var(--ink);line-height:1}
+.hs-val .r{color:var(--red)}
+.hs-lbl{font-size:11px;font-weight:500;color:var(--g400);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+.h-panel{background:#fff;border-radius:var(--rx) var(--rx) 0 0;border:1px solid var(--g100);border-bottom:none;padding:20px;box-shadow:0 -6px 32px rgba(0,0,0,.07)}
+.pc{display:flex;align-items:center;gap:5px;padding-bottom:12px;border-bottom:1px solid var(--g100);margin-bottom:14px}
+.pd{width:10px;height:10px;border-radius:50%}
+.pdr{background:#FF5F57}.pdy{background:#FEBC2E}.pdg{background:#28C840}
+.pt{margin-left:8px;font-size:12px;font-weight:600;color:var(--g400)}
+.pl{margin-left:auto;font-size:11px;font-weight:700;background:var(--greenbg);color:var(--greendark);border:1px solid var(--greenborder);padding:2px 10px;border-radius:20px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
+.metric{background:var(--g50);border-radius:9px;padding:11px 9px;border:1px solid var(--g100);text-align:center}
+.mv{font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:var(--ink);line-height:1}
+.mv.r{color:var(--red)}.mv.g{color:var(--greendark)}.mv.a{color:#D97706}
+.ml{font-size:9.5px;color:var(--g400);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.lrows{display:flex;flex-direction:column;gap:7px}
+.lrow{display:flex;align-items:center;gap:9px;background:var(--g50);border-radius:7px;padding:9px 12px;border:1px solid var(--g100)}
+.lrdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.lrname{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.lrstat{font-size:11.5px;color:var(--g400)}
+.lbg{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--greenbg);color:var(--greendark);border:1px solid var(--greenborder)}
+.lbr{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--redbg);color:var(--red);border:1px solid var(--redborder)}
+
+/* TRUST STRIP */
+.tstrip{background:#fff;border-bottom:1px solid var(--g100);padding:18px var(--pad)}
+.tstrip-in{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.tstrip-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g300);flex-shrink:0}
+.tstrip-logos{display:flex;gap:10px;flex-wrap:wrap}
+.tchip{font-size:13px;font-weight:600;color:var(--g500);padding:5px 14px;border-radius:40px;background:var(--g50);border:1px solid var(--g100)}
+
+/* CAPABILITIES — core Whatfix section */
+.caps{padding:80px var(--pad);background:#fff}
+.caps-in{max-width:var(--max);margin:0 auto}
+.cap-hdr{margin-bottom:48px}
+.eyebrow{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';width:16px;height:2px;background:var(--red);border-radius:2px;display:inline-block}
+h2.sec{font-family:'Inter',sans-serif;font-size:clamp(22px,2.8vw,36px);font-weight:800;line-height:1.15;color:var(--ink);letter-spacing:-.4px}
+h2.sec em{font-style:italic;color:var(--red)}
+.sec-lead{font-size:16px;color:var(--g500);margin-top:12px;line-height:1.75;font-weight:300;max-width:540px}
+.cap-body{display:grid;grid-template-columns:220px 1fr;gap:40px}
+/* Left tab list */
+.ctabs{display:flex;flex-direction:column;gap:3px;position:sticky;top:145px;align-self:start}
+.ctab{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r);font-size:13.5px;font-weight:600;color:var(--g400);cursor:pointer;transition:.15s;border:1.5px solid transparent}
+.ctab svg{width:32px;height:32px;min-width:32px;background:var(--g100);border-radius:7px;padding:7px;stroke:currentColor;fill:none;stroke-width:1.8;transition:.15s}
+.ctab:hover{background:var(--g50);color:var(--ink)}
+.ctab.act{background:var(--redbg);color:var(--red);border-color:var(--redborder)}
+.ctab.act svg{background:#fff;box-shadow:0 2px 8px rgba(201,28,28,.12)}
+/* Right panels */
+.cpanel{display:none;animation:fi .25s ease}
+.cpanel.act{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.cp-text h3{font-family:'Inter',sans-serif;font-size:23px;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:12px;letter-spacing:-.3px}
+.cp-text h3 em{font-style:italic;color:var(--red)}
+.cp-text p{font-size:15px;color:var(--g500);line-height:1.78;margin-bottom:18px;font-weight:300}
+.chk{list-style:none;display:flex;flex-direction:column;gap:9px}
+.chk li{font-size:14px;color:var(--g700);display:flex;align-items:flex-start;gap:9px;line-height:1.55}
+.chk li::before{content:'';width:19px;height:19px;border-radius:50%;flex-shrink:0;margin-top:1px;background:var(--greenbg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7' fill='none'%3E%3Cpath d='M1 3.5l2 2L8 1' stroke='%2320A030' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;border:1.5px solid var(--greenborder)}
+.clearn{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:700;color:var(--red);margin-top:20px;border-bottom:2px solid transparent;padding-bottom:1px;transition:.15s}
+.clearn:hover{border-bottom-color:var(--red)}
+.clearn::after{content:'→';transition:transform .2s}
+.clearn:hover::after{transform:translateX(3px)}
+.cp-vis{background:var(--g50);border-radius:var(--rx);padding:22px;border:1px solid var(--g100);position:sticky;top:145px}
+.cv-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--g100)}
+.cv-icon{width:36px;height:36px;border-radius:9px;background:var(--redbg);border:1px solid rgba(201,28,28,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cv-icon svg{width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8}
+.cv-t{font-size:13px;font-weight:700;color:var(--ink)}
+.cv-s{font-size:11.5px;color:var(--g400);margin-top:1px}
+.mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.mc{background:#fff;border-radius:9px;padding:11px 8px;border:1px solid var(--g100);text-align:center}
+.mcv{font-family:'Inter',sans-serif;font-size:18px;font-weight:800;line-height:1;color:var(--ink)}
+.mcv.r{color:var(--red)}.mcv.g{color:var(--greendark)}.mcv.a{color:#D97706}
+.mcl{font-size:9.5px;color:var(--g400);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.prows{display:flex;flex-direction:column;gap:11px}
+.prow-lbl{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--g700);margin-bottom:4px}
+.prow-lbl span:last-child{font-weight:400;color:var(--g400)}
+.ptr{height:7px;background:var(--g100);border-radius:4px;overflow:hidden}
+.pf{height:100%;border-radius:4px}
+
+/* ENTERPRISE GRID — Whatfix 4-card feature section */
+.ent{padding:72px var(--pad);background:var(--g50)}
+.ent-in{max-width:var(--max);margin:0 auto}
+.ent-hdr{text-align:center;margin-bottom:44px}
+.ent-hdr .eyebrow{justify-content:center}
+.ent-hdr .eyebrow::before,.ent-hdr .eyebrow::after{content:'';flex:1;max-width:36px;height:2px;background:var(--redborder)}
+.ent-hdr h2.sec{margin-bottom:8px}
+.ent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ec{background:#fff;border:1px solid var(--g100);border-radius:var(--rl);padding:24px 20px;transition:.2s;position:relative;overflow:hidden}
+.ec::after{content:attr(data-n);position:absolute;bottom:4px;right:10px;font-family:'Inter',sans-serif;font-size:48px;font-weight:800;color:rgba(201,28,28,.04);line-height:1;pointer-events:none}
+.ec:hover{border-color:rgba(201,28,28,.2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,28,28,.07)}
+.ec-icon{width:44px;height:44px;border-radius:10px;background:var(--redbg);border:1px solid rgba(201,28,28,.15);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.ec-icon svg{width:20px;height:20px;stroke:var(--red);fill:none;stroke-width:1.6}
+.ec h4{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:7px;line-height:1.3}
+.ec p{font-size:13px;color:var(--g500);line-height:1.65}
+.ec-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.cc{font-size:10.5px;font-weight:600;background:var(--redbg);color:var(--red);border:1px solid var(--redborder);padding:2px 7px;border-radius:4px}
+
+/* CLIENTS */
+.clients{padding:48px var(--pad);background:#fff;border-bottom:1px solid var(--g100)}
+.clients-in{max-width:var(--max);margin:0 auto}
+.clients h3{font-size:13px;font-weight:600;color:var(--g400);text-align:center;margin-bottom:24px;text-transform:uppercase;letter-spacing:.08em}
+.clogos{display:flex;flex-wrap:wrap;border:1px solid var(--g100);border-radius:var(--rl);overflow:hidden}
+.cl{flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;border-right:1px solid var(--g100);gap:6px;transition:.15s}
+.cl:last-child{border-right:none}
+.cl:hover{background:var(--redbg)}
+.cl-dot{width:7px;height:7px;border-radius:50%;background:var(--greendark)}
+.cl-name{font-size:14px;font-weight:700;color:var(--g700)}
+.cl-tag{font-size:10px;color:var(--g400);text-transform:uppercase;letter-spacing:.05em}
+
+/* TESTIMONIALS */
+.testi{padding:80px var(--pad);background:var(--g50)}
+.testi-in{max-width:var(--max);margin:0 auto}
+.t-hdr{margin-bottom:40px}
+.ttabs{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.ttab{width:52px;height:52px;border-radius:50%;border:2px solid var(--g200);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--g400);transition:.15s;flex-shrink:0}
+.ttab.act{border-color:var(--red);background:var(--redbg);color:var(--red)}
+.tpanel{display:none;animation:fi .25s ease}
+.tpanel.act{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center}
+.tquote{font-size:clamp(15px,1.7vw,20px);font-weight:400;line-height:1.7;color:var(--ink);font-style:italic;margin-bottom:20px;padding-left:22px;position:relative}
+.tquote::before{content:'"';position:absolute;left:0;top:-4px;font-size:36px;color:var(--redborder);font-style:normal;line-height:1}
+.tstars{display:flex;gap:3px;margin-bottom:16px}
+.star{width:14px;height:14px;background:var(--red);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.tperson{display:flex;align-items:center;gap:10px}
+.tav{width:44px;height:44px;border-radius:50%;background:var(--redbg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--red);border:2px solid rgba(201,28,28,.2);flex-shrink:0}
+.tname{font-size:14px;font-weight:700;color:var(--ink)}
+.trole{font-size:12px;color:var(--g500);margin-top:1px}
+.tco{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.tread{font-size:13px;font-weight:600;color:var(--red);margin-top:16px;display:inline-flex;align-items:center;gap:4px}
+.tread::after{content:'→'}
+.tcard{background:#fff;border-radius:var(--rx);padding:26px;border:1px solid var(--g100);box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.tcard-co{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.tcard-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--red);background:var(--redbg);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:16px}
+.outcomes{display:flex;flex-direction:column;gap:9px}
+.outcome{display:flex;align-items:center;gap:9px}
+.oico{width:26px;height:26px;border-radius:50%;background:var(--greenbg);border:1px solid var(--greenborder);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.oico svg{width:11px;height:11px;stroke:var(--greendark);fill:none;stroke-width:2.5}
+.otxt{font-size:13px;color:var(--g700);font-weight:500}
+
+/* SECURITY */
+.security{padding:56px var(--pad);background:#fff;border-top:1px solid var(--g100)}
+.sec-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.sec-text h2{font-family:'Inter',sans-serif;font-size:27px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.3px}
+.sec-text p{font-size:15px;color:var(--g500);line-height:1.75;font-weight:300}
+.sbadges{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.sbadge{background:var(--g50);border:1.5px solid var(--g100);border-radius:var(--rl);padding:16px 12px;text-align:center;transition:.15s}
+.sbadge:hover{border-color:rgba(201,28,28,.2);background:var(--redbg)}
+.sbadge-ico{font-size:20px;margin-bottom:6px}
+.sbadge-n{font-size:12px;font-weight:700;color:var(--ink)}
+.sbadge-d{font-size:10px;color:var(--g400);margin-top:1px}
+
+/* RESOURCES */
+.resources{padding:64px var(--pad);background:var(--g50);border-top:1px solid var(--g100)}
+.resources-in{max-width:var(--max);margin:0 auto}
+.resources h3{font-family:'Inter',sans-serif;font-size:21px;font-weight:700;color:var(--ink);margin-bottom:26px}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rc{background:#fff;border:1px solid var(--g100);border-radius:var(--rl);padding:22px;transition:.2s;display:flex;flex-direction:column}
+.rc:hover{border-color:rgba(201,28,28,.2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.rtype{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--red);background:var(--redbg);padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:12px}
+.rc h4{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:7px}
+.rc p{font-size:13px;color:var(--g500);line-height:1.65;flex:1}
+.rlink{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--red);margin-top:12px;border-bottom:2px solid transparent;padding-bottom:1px;transition:.15s}
+.rlink:hover{border-bottom-color:var(--red)}
+.rlink::after{content:'→'}
+
+/* FINAL CTA */
+.cta-ban{background:linear-gradient(135deg,#0D0200,#280808 50%,#0D0200);padding:80px var(--pad);position:relative;overflow:hidden}
+.cta-ban::before{content:'';position:absolute;top:-80px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,28,28,.14),transparent 60%);pointer-events:none}
+.cta-ban-in{max-width:680px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.cta-ban-logo{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--red);margin-bottom:22px;opacity:.7}
+.cta-ban h2{font-family:'Inter',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.5px;line-height:1.15}
+.cta-ban h2 em{font-style:italic;color:var(--red)}
+.cta-ban p{font-size:17px;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:32px;font-weight:300}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btns .btn-r{font-size:15px;padding:14px 30px}
+.btn-lt{font-size:14.5px;font-weight:600;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.18);padding:13px 24px;border-radius:var(--r);text-decoration:none;transition:.15s}
+.btn-lt:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.cta-trust{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.cti{font-size:11.5px;font-weight:500;color:rgba(255,255,255,.3);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:40px}
+
+/* STICKY BAR */
+.sbar{position:fixed;bottom:0;left:0;right:0;z-index:600;background:rgba(201,28,28,.97);backdrop-filter:blur(10px);padding:12px var(--pad);display:none;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1)}
+.sbar p{font-size:13px;color:rgba(255,255,255,.8)}
+.sbar p strong{color:#fff}
+.sbar-btns{display:flex;gap:8px}
+.sbar-w{background:#fff;color:var(--red);font-size:13px;font-weight:700;padding:8px 20px;border-radius:var(--r);border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.sbar-o{background:transparent;color:rgba(255,255,255,.7);font-size:13px;font-weight:600;padding:8px 14px;border-radius:var(--r);border:1.5px solid rgba(255,255,255,.22);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
+
+/* FOOTER */
+footer{background:var(--ink2);padding:52px var(--pad) 22px}
+.ft-in{max-width:var(--max);margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px}
+.ft-brand-n{font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:var(--red)}
+.ft-brand p{font-size:13px;color:rgba(255,255,255,.28);line-height:1.7;margin-top:8px}
+.ft-col h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.2);margin-bottom:12px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ft-col li a{font-size:13px;color:rgba(255,255,255,.38);text-decoration:none;transition:.15s}
+.ft-col li a:hover{color:#fff}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-bot p{font-size:11.5px;color:rgba(255,255,255,.15)}
+.ft-certs{display:flex;gap:5px}
+.fc{font-size:10px;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.2);padding:2px 8px;border-radius:3px}
+
+@media(max-width:1020px){
+  .hero-in,.cpanel.act,.sec-in,.tpanel.act{grid-template-columns:1fr;gap:28px}
+  .cap-body{grid-template-columns:1fr;gap:20px}
+  .ctabs{flex-direction:row;flex-wrap:wrap;position:static}
+  .cp-vis,.cv-vis{position:static}
+  .ent-grid{grid-template-columns:1fr 1fr}
+  .tcard{display:none}
+  .ft-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  :root{--pad:18px}
+  .ent-grid,.rgrid{grid-template-columns:1fr}
+  .sbadges{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="logo">tradelab</span>
+  <div class="nav-links">
+    <a class="na act" href="#">Platform</a>
+    <a class="na" href="#">Solutions</a>
+    <a class="na" href="#">Clients</a>
+    <a class="na" href="#">Company</a>
+    <a class="na" href="#">Resources</a>
+  </div>
+  <div class="nav-r">
+    <a class="btn-g" href="mailto:info@tradelab.in">Talk to Sales</a>
+    <a class="btn-r" href="#cta">Get a Demo →</a>
+  </div>
+</nav>
+
+<div class="subnav">
+  <div class="subnav-wrap">
+    <div class="snav act" onclick="SP('oms',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>OMS & Risk Management</div>
+    <div class="snav" onclick="SP('trading',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Trading Platform</div>
+    <div class="snav" onclick="SP('kyc',this)"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>KYC & Onboarding</div>
+    <div class="snav" onclick="SP('exchange',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Exchange Infrastructure</div>
+    <div class="snav" onclick="SP('cloud',this)"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>Cloud Services</div>
+    <div class="snav" onclick="SP('api',this)"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>API & Integrations</div>
+  </div>
+</div>
+
+<!-- ═══════════════ OMS PAGE ═══════════════ -->
+<div id="pp-oms" class="pp act">
+<section class="hero">
+<div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">OMS</span><span class="h-badge-t">Order Management & Risk</span></div>
+    <h1 class="hh">Process 1,000+ orders per second.<br><em>Never miss a risk limit.</em></h1>
+    <p class="h-lead">A real-time OMS and risk engine built for Indian capital markets. Handles NSE, BSE and MCX simultaneously — with pre-trade and post-trade validation at every layer.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">See the OMS in action →</a><a href="mailto:info@tradelab.in" class="btn-g">Talk to an engineer</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val"><span class="r">1,000+</span></div><div class="hs-lbl">Orders / second</div></div>
+      <div><div class="hs-val">&lt;2ms</div><div class="hs-lbl">Order latency</div></div>
+      <div><div class="hs-val">99.9<span class="r">%</span></div><div class="hs-lbl">Uptime SLA</div></div>
+      <div><div class="hs-val">NSE · BSE · MCX</div><div class="hs-lbl">Simultaneously</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">OMS Live — HDFC Sky</span><span class="pl">● All live</span></div>
+    <div class="metrics">
+      <div class="metric"><div class="mcv r">1,024</div><div class="mcl">Orders/sec</div></div>
+      <div class="metric"><div class="mcv a">1.8ms</div><div class="mcl">Latency</div></div>
+      <div class="metric"><div class="mcv g">0</div><div class="mcl">Risk breaches</div></div>
+    </div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--red)"></div><div class="lrname">NSE Adapter</div><div class="lrstat">423 ord/sec</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#D97706"></div><div class="lrname">BSE Adapter</div><div class="lrstat">389 ord/sec</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#8B5CF6"></div><div class="lrname">MCX Adapter</div><div class="lrstat">212 ord/sec</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">RMS Risk Engine</div><div class="lrstat">In-memory M2M</div><span class="lbr">Active</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">Trusted by</span><div class="tstrip-logos"><span class="tchip">Zerodha</span><span class="tchip">HDFC Sky</span><span class="tchip">AliceBlue</span><span class="tchip">MasterTrust</span><span class="tchip">Jainam</span><span class="tchip">Kotak Securities</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">Everything your OMS & RMS needs.<br><em>Nothing extra to build.</em></h2>
+    <p class="sec-lead">From pre-trade risk validation to end-of-day file automation — every workflow covered out of the box.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('oms','order',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Order Management</div>
+      <div class="ctab" onclick="SC('oms','risk',this)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Risk Management</div>
+      <div class="ctab" onclick="SC('oms','surv',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Surveillance</div>
+      <div class="ctab" onclick="SC('oms','bod',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>BOD / EOD Ops</div>
+    </div>
+    <div>
+      <div id="oms-c-order" class="cpanel act">
+        <div class="cp-text">
+          <h3>High-throughput order processing <em>built for Indian markets</em></h3>
+          <p>Handles NSE, BSE and MCX simultaneously. Every order passes pre-trade risk validation before it reaches the exchange adapter. FIX protocol compatible, horizontally scalable via Golang goroutines.</p>
+          <ul class="chk"><li>1,000+ orders/sec — verified in live production</li><li>Pre-trade checks: margin, exposure, quantity, fat-finger</li><li>Multi-OMS orchestrator — manage multiple OMS flows</li><li>FIX 4.2/4.4 for exchange connectivity</li><li>Modify/cancel with full state management</li><li>Stateless REST API — infinite horizontal scaling</li></ul>
+          <a href="#cta" class="clearn">Book a live OMS demo</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="cv-t">OMS throughput — HDFC Sky</div><div class="cv-s">Live production snapshot</div></div></div>
+          <div class="mrow"><div class="mc"><div class="mcv r">1,024</div><div class="mcl">Orders/sec</div></div><div class="mc"><div class="mcv a">1.8ms</div><div class="mcl">Latency</div></div><div class="mc"><div class="mcv g">3</div><div class="mcl">Exchanges</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Order throughput</span><span>1,024/sec</span></div><div class="ptr"><div class="pf" style="width:85%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Pre-trade validation</span><span>&lt;0.5ms</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Exchange coverage</span><span>NSE+BSE+MCX</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+            <div><div class="prow-lbl"><span>System uptime</span><span>99.9%</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--red)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="oms-c-risk" class="cpanel">
+        <div class="cp-text">
+          <h3>Real-time risk management. <em>Zero database lag.</em></h3>
+          <p>In-memory computation engine for instant risk calculations. Dynamic margin logic, auto square-off scheduler, and automated M2M alerts. Deployable as an independent microservice alongside your existing stack.</p>
+          <ul class="chk"><li>In-memory RMS — zero lag on every risk check</li><li>Dynamic margin: VAR, Max of VAR, client-specific rules</li><li>Risk templates — assign rules by group</li><li>Auto square-off at configurable time (e.g. 15:20)</li><li>M2M alerts — email + SMS on threshold breach</li><li>RMS block — global, login, or template-level controls</li></ul>
+          <a href="#cta" class="clearn">See RMS in action</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="cv-t">Risk engine performance</div><div class="cv-s">In-memory · Real-time</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Risk calculation speed</span><span>In-memory</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Margin coverage</span><span>Dynamic VAR</span></div><div class="ptr"><div class="pf" style="width:90%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Auto square-off</span><span>Zero manual steps</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+            <div><div class="prow-lbl"><span>Alert delivery</span><span>&lt;1 second</span></div><div class="ptr"><div class="pf" style="width:98%;background:var(--red)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="oms-c-surv" class="cpanel">
+        <div class="cp-text">
+          <h3>Continuous surveillance. <em>Real-time NLV reporting.</em></h3>
+          <p>M2M monitoring across all client positions, automated notifications on threshold breach, and segment-wise NLV reports with full margin utilisation breakdown.</p>
+          <ul class="chk"><li>Continuous M2M monitoring across all positions</li><li>Instant alerts when thresholds are breached</li><li>Segment-wise margin utilisation dashboard</li><li>Realised P&L, unrealised P&L, used and available margin</li><li>NLV reports with custom filter and export</li><li>Every action logged with full audit trail</li></ul>
+          <a href="#cta" class="clearn">See the surveillance module</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div><div class="cv-t">Surveillance coverage</div><div class="cv-s">All segments · Real-time</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>M2M monitoring</span><span>Continuous</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Alert latency</span><span>&lt;1 second</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Segment coverage</span><span>EQ+F&O+CUR+COM</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="oms-c-bod" class="cpanel">
+        <div class="cp-text">
+          <h3>BOD / EOD automation. <em>Single-click operations.</em></h3>
+          <p>Single-click BOD file upload with real-time validation. Fully automated EOD trade file sharing, pledge and EDIS processing, and settlement integration for equity and commodity.</p>
+          <ul class="chk"><li>Manual BOD — upload Master, Position, Holding, Ledger</li><li>Automated BOD — single-click from predefined location</li><li>Real-time validation — record counts, instant error flags</li><li>EOD equity: NSE/BSE trade files, pledge/EDIS, pay-in/payout</li><li>EOD commodity: MCX trade file after 11:55 PM</li><li>Download any required EOD file on demand</li></ul>
+          <a href="#cta" class="clearn">See BOD/EOD workflow</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="cv-t">EOD schedule</div><div class="cv-s">Equity + commodity</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Equity EOD (after 4 PM)</span><span>NSE + BSE</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Commodity EOD (11:55 PM)</span><span>MCX</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+            <div><div class="prow-lbl"><span>BOD single-click upload</span><span>Zero errors</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ent"><div class="ent-in">
+  <div class="ent-hdr">
+    <div class="eyebrow">Built for enterprise brokers</div>
+    <h2 class="sec">Everything included. <em>Nothing left to build.</em></h2>
+    <p class="sec-lead">The full OMS and RMS feature set — deployed and production-ready in weeks, not 18 months.</p>
+  </div>
+  <div class="ent-grid">
+    <div class="ec" data-n="01"><div class="ec-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h4>High-throughput OMS</h4><p>1,000+ orders/sec across NSE, BSE and MCX. FIX protocol. Golang goroutines for superior concurrency.</p><div class="ec-chips"><span class="cc">Golang</span><span class="cc">FIX API</span><span class="cc">1K+ TPS</span></div></div>
+    <div class="ec" data-n="02"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>In-memory Risk Engine</h4><p>Zero-lag risk computation. Dynamic margin, auto square-off, and real-time M2M monitoring with instant alerts.</p><div class="ec-chips"><span class="cc">In-memory</span><span class="cc">Auto SQ-off</span></div></div>
+    <div class="ec" data-n="03"><div class="ec-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></div><h4>Multi-OMS Orchestrator</h4><p>Middleware layer to connect and manage multiple order management flows in a single unified system.</p><div class="ec-chips"><span class="cc">Middleware</span><span class="cc">Multi-flow</span></div></div>
+    <div class="ec" data-n="04"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><h4>BOD / EOD Automation</h4><p>Single-click BOD upload. Automated EOD trade file sharing for NSE, BSE and MCX — zero manual steps.</p><div class="ec-chips"><span class="cc">Single-click</span><span class="cc">Automated</span></div></div>
+  </div>
+</div></section>
+
+<div class="clients"><div class="clients-in">
+  <h3>Used by India's leading brokers and banks</h3>
+  <div class="clogos">
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">Zerodha</div><div class="cl-tag">OMS · Live</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">HDFC Sky</div><div class="cl-tag">OMS+RMS · 4yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">AliceBlue</div><div class="cl-tag">Full stack · 5yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">MasterTrust</div><div class="cl-tag">OMS · 7yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">InCred Money</div><div class="cl-tag">OMS · Live</div></div>
+  </div>
+</div></div>
+
+<section class="testi"><div class="testi-in">
+  <div class="t-hdr"><div class="eyebrow">What clients say</div><h2 class="sec">In their own words. <em>From live deployments.</em></h2></div>
+  <div class="ttabs">
+    <div class="ttab act" onclick="ST('oms','hb',this)">HB</div>
+    <div class="ttab" onclick="ST('oms','nk',this)">NK</div>
+    <div class="ttab" onclick="ST('oms','ts',this)">TS</div>
+  </div>
+  <div id="oms-t-hb" class="tpanel act">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">The stock broking platform developed by Tradelab is very good. The project was delivered in a timely manner with a very high degree of accountability. They have a deep understanding of the stock broking industry.</p><div class="tperson"><div class="tav">HB</div><div><div class="tname">Harish Balasubramanian</div><div class="trole">SVP, Head of Engineering</div><div class="tco">HDFC Securities</div></div></div><a href="#cta" class="tread">Read the HDFC Sky story</a></div>
+    <div class="tcard"><div class="tcard-co">HDFC Sky</div><span class="tcard-type">Bank → broker transformation</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">OMS + RMS with TCS BaNCS FIX</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Under 3-minute KYC activation</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">4+ years in stable production</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Competing directly with fintechs</div></div></div></div>
+  </div>
+  <div id="oms-t-nk" class="tpanel">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">After a time being in the financial services business, I found a technology team that can not only execute your ideas but also make them much better.</p><div class="tperson"><div class="tav">NK</div><div><div class="tname">Nithin Kamath</div><div class="trole">Founder & CEO</div><div class="tco">Zerodha</div></div></div><a href="#cta" class="tread">Read the Zerodha story</a></div>
+    <div class="tcard"><div class="tcard-co">Zerodha</div><span class="tcard-type">Broker platform build</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Pi rated best EXE client 2015–2016</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Thousands → lakhs of active users</div></div></div></div>
+  </div>
+  <div id="oms-t-ts" class="tpanel">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">Tradelab has been a perfect partner for our trading platforms. Their team is highly competent and quite prompt in getting things done.</p><div class="tperson"><div class="tav">TS</div><div><div class="tname">Taranjeet Singh</div><div class="trole">VP, IT</div><div class="tco">MasterTrust</div></div></div><a href="#cta" class="tread">Read the MasterTrust story</a></div>
+    <div class="tcard"><div class="tcard-co">MasterTrust</div><span class="tcard-type">Long-term partner</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">7+ years continuous production</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Zero critical incidents</div></div></div></div>
+  </div>
+</div></section>
+
+<section class="security"><div class="sec-in">
+  <div class="sec-text"><div class="eyebrow">Security & Compliance</div><h2>Your data security is<br>our responsibility.</h2><p>ISO 27001:2022 certified infrastructure aligned with SEBI's Cyber Security and Resilience Framework. AES-256 encryption, TLS 1.3, RBAC, MFA and full audit trails included in every deployment.</p></div>
+  <div class="sbadges">
+    <div class="sbadge"><div class="sbadge-ico">🔐</div><div class="sbadge-n">ISO 27001:2022</div><div class="sbadge-d">Information security</div></div>
+    <div class="sbadge"><div class="sbadge-ico">✅</div><div class="sbadge-n">ISO 9001:2015</div><div class="sbadge-d">Quality management</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🏛️</div><div class="sbadge-n">SEBI CSRF</div><div class="sbadge-d">Cyber resilience</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🔍</div><div class="sbadge-n">VAPT Ready</div><div class="sbadge-d">Pen test compliant</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🔒</div><div class="sbadge-n">AES-256</div><div class="sbadge-d">Encryption at rest</div></div>
+    <div class="sbadge"><div class="sbadge-ico">📋</div><div class="sbadge-n">Audit Trails</div><div class="sbadge-d">Every action logged</div></div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in">
+  <h3>Explore related resources</h3>
+  <div class="rgrid">
+    <div class="rc"><span class="rtype">Case Study</span><h4>How HDFC Sky built a tech-first discount brokerage on Tradelab OMS + RMS</h4><p>Full OMS, RMS, KYC, and TCS BaNCS integration. 4+ years stable. Competing with new-age fintechs.</p><a href="#cta" class="rlink">Read the case study</a></div>
+    <div class="rc"><span class="rtype">Guide</span><h4>How to choose an OMS for a SEBI-registered broker in India</h4><p>What to evaluate, what to avoid, and why build vs buy almost always favours buying from a specialist.</p><a href="#cta" class="rlink">Read the guide</a></div>
+    <div class="rc"><span class="rtype">Article</span><h4>OMS vs RMS: what's the difference and why you need both</h4><p>Most brokers conflate order management and risk management. This article explains the difference clearly.</p><a href="#cta" class="rlink">Read the article</a></div>
+  </div>
+</div></section>
+</div><!-- end oms -->
+
+<!-- ═══ TRADING PLATFORM ═══ -->
+<div id="pp-trading" class="pp">
+<section class="hero">
+<div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">Trading UI</span><span class="h-badge-t">Web · Mobile · EXE</span></div>
+    <h1 class="hh">A fully-featured trading platform.<br><em>White-label ready. Live in weeks.</em></h1>
+    <p class="h-lead">Flutter mobile, React JS web, and EXE dealer terminal — deployed under your brand and domain. Equity, F&O, commodity and currency supported on day one. Used by Zerodha, HDFC Sky and AliceBlue.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">Watch a platform demo →</a><a href="mailto:info@tradelab.in" class="btn-g">Talk to the team</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val"><span class="r">15x</span></div><div class="hs-lbl">AliceBlue user growth</div></div>
+      <div><div class="hs-val">6 wks</div><div class="hs-lbl">Time to go live</div></div>
+      <div><div class="hs-val">8+ yrs</div><div class="hs-lbl">Proven stability</div></div>
+      <div><div class="hs-val">iOS · Android · Win</div><div class="hs-lbl">All platforms</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">Trading Platform — AliceBlue</span><span class="pl">● Live</span></div>
+    <div class="metrics">
+      <div class="metric"><div class="mcv r">75K+</div><div class="mcl">Monthly users</div></div>
+      <div class="metric"><div class="mcv a">15x</div><div class="mcl">Growth</div></div>
+      <div class="metric"><div class="mcv g">8+</div><div class="mcl">Years live</div></div>
+    </div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--red)"></div><div class="lrname">Flutter Mobile (iOS/Android/Win)</div><div class="lrstat">Real-time feeds</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#185FA5"></div><div class="lrname">React JS Web Terminal</div><div class="lrstat">Virtual DOM</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#8B5CF6"></div><div class="lrname">EXE Dealer Terminal</div><div class="lrstat">Multi-screen</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">White-label</div><div class="lrstat">Your brand · Your domain</div><span class="lbr">Ready</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">Platform clients</span><div class="tstrip-logos"><span class="tchip">Zerodha (Pi)</span><span class="tchip">HDFC Sky</span><span class="tchip">AliceBlue</span><span class="tchip">MasterTrust (Agnik)</span><span class="tchip">InCred Money</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">One codebase. Every device. <em>Every segment.</em></h2>
+    <p class="sec-lead">Web, mobile and desktop — built on a single architecture so your platform stays consistent across every channel your clients use.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('trading','mobile',this)"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Mobile App</div>
+      <div class="ctab" onclick="SC('trading','web',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Web Terminal</div>
+      <div class="ctab" onclick="SC('trading','dealer',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>Dealer / EXE</div>
+      <div class="ctab" onclick="SC('trading','orders',this)"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/></svg>Order Types</div>
+    </div>
+    <div>
+      <div id="trading-c-mobile" class="cpanel act">
+        <div class="cp-text">
+          <h3>Native mobile app. <em>One codebase, every platform.</em></h3>
+          <p>A single Flutter codebase runs natively on iOS, Android and Windows. Real-time tick-by-tick data, full order management, charts, screeners and mutual funds — all in one app under your brand.</p>
+          <ul class="chk"><li>iOS, Android, Windows — single Flutter codebase</li><li>Real-time watchlist with tick-by-tick updates</li><li>Full order management: place, modify, cancel</li><li>Piserver charts — 100+ indicators, drawing tools</li><li>Mutual funds, ETF and IPO in the same flow</li><li>Push notifications via Google FCM</li></ul>
+          <a href="#cta" class="clearn">See mobile demo</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div><div><div class="cv-t">Flutter mobile — AliceBlue</div><div class="cv-s">Live production stats</div></div></div>
+          <div class="mrow"><div class="mc"><div class="mcv r">75K+</div><div class="mcl">Monthly users</div></div><div class="mc"><div class="mcv a">65%</div><div class="mcl">On mobile</div></div><div class="mc"><div class="mcv g">3</div><div class="mcl">Platforms</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Monthly active users</span><span>75K+</span></div><div class="ptr"><div class="pf" style="width:90%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Mobile user share</span><span>65%</span></div><div class="ptr"><div class="pf" style="width:65%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Platform stability</span><span>8+ years</span></div><div class="ptr"><div class="pf" style="width:99%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="trading-c-web" class="cpanel">
+        <div class="cp-text">
+          <h3>React JS web terminal. <em>Real-time. Lightweight. Responsive.</em></h3>
+          <p>Virtual DOM rendering for live data without page reloads. Cloudfront delivery for fast load times globally. Integrated charts, multi-watchlist, portfolio and fund management in one responsive interface.</p>
+          <ul class="chk"><li>React JS — Virtual DOM, real-time data rendering</li><li>Cloudfront / Nginx CDN delivery</li><li>Multi-exchange, multi-segment support</li><li>100+ chart indicators with drawing tools</li><li>Customisable multi-watchlist</li><li>Portfolio, P&L, funds in a single view</li></ul>
+          <a href="#cta" class="clearn">See web terminal demo</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><div><div class="cv-t">Web terminal — HDFC Sky</div><div class="cv-s">Live production stats</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Render performance</span><span>Virtual DOM</span></div><div class="ptr"><div class="pf" style="width:98%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Segment coverage</span><span>EQ+F&O+CUR+COM</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Chart indicators</span><span>100+</span></div><div class="ptr"><div class="pf" style="width:95%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="trading-c-dealer" class="cpanel">
+        <div class="cp-text">
+          <h3>EXE dealer terminal. <em>Rated best in India 2015–2016.</em></h3>
+          <p>Built for dealers and branch users. Keyboard shortcuts for rapid order entry, multi-screen support, and dealer-assist mode — place orders on behalf of clients instantly. Zerodha's Pi software was built on this foundation.</p>
+          <ul class="chk"><li>High-performance executable — no browser overhead</li><li>Keyboard shortcuts for rapid order entry</li><li>Multi-screen support for dealer desks</li><li>Dealer-assist — trade on client behalf</li><li>Branch-level client management</li><li>Rated best EXE client in India 2015–2016</li></ul>
+          <a href="#cta" class="clearn">See dealer terminal demo</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg></div><div><div class="cv-t">EXE terminal — Zerodha Pi</div><div class="cv-s">2015–2016 track record</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Market recognition</span><span>Best EXE India</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>User growth (Zerodha)</span><span>1,000 → Lakhs</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="trading-c-orders" class="cpanel">
+        <div class="cp-text">
+          <h3>Advanced order types. <em>For every trader profile.</em></h3>
+          <p>Market, limit, SL, iceberg, GTT and basket orders — all available simultaneously on web, mobile and EXE. No add-on required, no module to unlock. Every segment covered from day one.</p>
+          <ul class="chk"><li>Market, limit, SL and SL-M orders</li><li>Iceberg orders — large order chunking</li><li>GTT (Good Till Triggered) — conditional orders</li><li>Basket orders — multi-stock single click</li><li>After-market orders (AMO)</li><li>Cover orders with embedded stop-loss</li></ul>
+          <a href="#cta" class="clearn">See all order types</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></div><div><div class="cv-t">Order types — all platforms</div><div class="cv-s">Web + mobile + EXE</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Standard orders</span><span>Market+Limit+SL</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Advanced orders</span><span>Iceberg+GTT+Basket</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Segment coverage</span><span>EQ+F&O+CUR+COM</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ent"><div class="ent-in">
+  <div class="ent-hdr">
+    <div class="eyebrow">Everything included</div>
+    <h2 class="sec">White-label ready. <em>Live in 6 weeks.</em></h2>
+    <p class="sec-lead">Complete trading platform — web, mobile and desktop — deployed under your brand in weeks, not 18 months.</p>
+  </div>
+  <div class="ent-grid">
+    <div class="ec" data-n="01"><div class="ec-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div><h4>Flutter Mobile App</h4><p>Single codebase for iOS, Android and Windows. Real-time feeds, charts, watchlist and full order management.</p><div class="ec-chips"><span class="cc">Flutter</span><span class="cc">iOS+Android+Win</span></div></div>
+    <div class="ec" data-n="02"><div class="ec-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><h4>React JS Web Terminal</h4><p>Lightweight, real-time, responsive. 100+ chart indicators, multi-watchlist, portfolio and fund management.</p><div class="ec-chips"><span class="cc">React JS</span><span class="cc">Virtual DOM</span></div></div>
+    <div class="ec" data-n="03"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>White-label Ready</h4><p>Your logo, brand colour, domain and app store listing. Tradelab stays invisible — your clients see only your brand.</p><div class="ec-chips"><span class="cc">Custom brand</span><span class="cc">Your domain</span></div></div>
+    <div class="ec" data-n="04"><div class="ec-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></div><h4>Advanced Order Types</h4><p>Iceberg, GTT, basket orders — every order type on web, mobile and EXE simultaneously from day one.</p><div class="ec-chips"><span class="cc">GTT</span><span class="cc">Iceberg</span><span class="cc">Basket</span></div></div>
+  </div>
+</div></section>
+
+<div class="clients"><div class="clients-in">
+  <h3>Powering trading platforms across India</h3>
+  <div class="clogos">
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">Zerodha</div><div class="cl-tag">Pi EXE · 2015</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">HDFC Sky</div><div class="cl-tag">Full stack · 4yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">AliceBlue</div><div class="cl-tag">15x growth · 5yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">MasterTrust</div><div class="cl-tag">Agnik app · 7yr+</div></div>
+    <div class="cl"><div class="cl-dot"></div><div class="cl-name">InCred Money</div><div class="cl-tag">Stocko · Live</div></div>
+  </div>
+</div></div>
+
+<section class="testi"><div class="testi-in">
+  <div class="t-hdr"><div class="eyebrow">What clients say</div><h2 class="sec">15x growth. 8 years. <em>Zero critical issues.</em></h2></div>
+  <div class="ttabs">
+    <div class="ttab act" onclick="ST('trading','nj',this)">NJ</div>
+    <div class="ttab" onclick="ST('trading','nk',this)">NK</div>
+    <div class="ttab" onclick="ST('trading','an',this)">AN</div>
+  </div>
+  <div id="trading-t-nj" class="tpanel act">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">Tradelab platforms are reliable, stable and user friendly. We highly recommend Tradelab to any broking firm who wants products matching market standards. From 5,000 to 75,000 monthly logins — zero major incidents.</p><div class="tperson"><div class="tav">NJ</div><div><div class="tname">Nagarjun</div><div class="trole">CTO</div><div class="tco">AliceBlue</div></div></div><a href="#cta" class="tread">Read the AliceBlue story</a></div>
+    <div class="tcard"><div class="tcard-co">AliceBlue</div><span class="tcard-type">Digital transformation</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">5,000 → 75,000+ monthly logins (15x)</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Web + Mobile + EXE deployed</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">5 years in stable production</div></div></div></div>
+  </div>
+  <div id="trading-t-nk" class="tpanel">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">A technology team that can not only execute your ideas but also make them much better. Pi was rated the best EXE client in India.</p><div class="tperson"><div class="tav">NK</div><div><div class="tname">Nithin Kamath</div><div class="trole">Founder & CEO</div><div class="tco">Zerodha</div></div></div><a href="#cta" class="tread">Read the Zerodha story</a></div>
+    <div class="tcard"><div class="tcard-co">Zerodha</div><span class="tcard-type">EXE trading platform</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Pi rated best EXE India 2015–16</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">1,000 → lakhs of active users</div></div></div></div>
+  </div>
+  <div id="trading-t-an" class="tpanel">
+    <div><div class="tstars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="tquote">Fast and intuitive trading platforms. The Tradelab team deeply understands active trader requirements — they bring ideas we hadn't even thought of.</p><div class="tperson"><div class="tav">AN</div><div><div class="tname">Anoop Naidu</div><div class="trole">CTO</div><div class="tco">SASOnline</div></div></div><a href="#cta" class="tread">Read the SASOnline story</a></div>
+    <div class="tcard"><div class="tcard-co">SASOnline → InCred</div><span class="tcard-type">Platform stability → acquisition</span><div class="outcomes"><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Deployed May 2017 · Still live</div></div><div class="outcome"><div class="oico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="otxt">Stability drove InCred acquisition</div></div></div></div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in"><h3>Explore related resources</h3><div class="rgrid">
+  <div class="rc"><span class="rtype">Case Study</span><h4>AliceBlue: 15x user growth on Tradelab's web, mobile and EXE platform</h4><p>From 5,000 to 75,000+ monthly logins between 2017 and 2022. The platform scaled without a single major incident.</p><a href="#cta" class="rlink">Read the case study</a></div>
+  <div class="rc"><span class="rtype">Guide</span><h4>Build vs buy: the real cost of building a trading platform in-house</h4><p>18–24 months, crores of investment, and a brittle product. Why specialist platforms win for Indian brokers.</p><a href="#cta" class="rlink">Read the guide</a></div>
+  <div class="rc"><span class="rtype">Case Study</span><h4>SASOnline → Stocko → InCred: 8 years of platform stability</h4><p>Zero major incidents since May 2017. Platform stability was a key factor in InCred Money's strategic acquisition.</p><a href="#cta" class="rlink">Read the case study</a></div>
+</div></div></section>
+</div><!-- end trading -->
+
+<!-- ═══ KYC ═══ -->
+<div id="pp-kyc" class="pp">
+<section class="hero"><div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">KYC</span><span class="h-badge-t">Digital Onboarding</span></div>
+    <h1 class="hh">KYC in under 2 minutes.<br><em>Fully automated. SEBI compliant.</em></h1>
+    <p class="h-lead">Aadhaar eKYC, DigiLocker, Video KYC, PAN, IPV and nomination — all in one mobile-first flow. Client is activated the moment KYC completes. Zero manual steps.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">Watch 90-sec KYC demo →</a><a href="mailto:info@tradelab.in" class="btn-g">Talk to compliance team</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val"><span class="r">&lt;2</span> min</div><div class="hs-lbl">End-to-end KYC</div></div>
+      <div><div class="hs-val">SEBI</div><div class="hs-lbl">Compliant</div></div>
+      <div><div class="hs-val">Zero</div><div class="hs-lbl">Manual steps</div></div>
+      <div><div class="hs-val">API-driven</div><div class="hs-lbl">Auto activation</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">KYC Flow — HDFC Sky</span><span class="pl">● Live</span></div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--red)"></div><div class="lrname">Step 1 — Aadhaar eKYC</div><div class="lrstat">OTP · auto-fill</div><span class="lbg">✓ Done</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#185FA5"></div><div class="lrname">Step 2 — PAN Verification</div><div class="lrstat">NSDL real-time</div><span class="lbg">✓ Done</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#D97706"></div><div class="lrname">Step 3 — Video KYC</div><div class="lrstat">SEBI compliant</div><span class="lbg">✓ Done</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">Account Activated</div><div class="lrstat">RMS template auto-assigned</div><span class="lbr">Live</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">Used at</span><div class="tstrip-logos"><span class="tchip">HDFC Sky</span><span class="tchip">20+ institutions</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">Every KYC step. <em>One seamless flow.</em></h2>
+    <p class="sec-lead">From Aadhaar to demat account creation — the complete onboarding journey inside a single mobile session in under 2 minutes.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('kyc','journey',this)"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>KYC Journey</div>
+      <div class="ctab" onclick="SC('kyc','compliance',this)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compliance</div>
+      <div class="ctab" onclick="SC('kyc','automation',this)"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>Automation</div>
+    </div>
+    <div>
+      <div id="kyc-c-journey" class="cpanel act">
+        <div class="cp-text">
+          <h3>Complete digital KYC in <em>a single mobile session</em></h3>
+          <p>Every step — Aadhaar, PAN, DigiLocker, Video KYC, bank linking, IPV and nomination — completed inside one app without leaving the flow. Under 2 minutes from start to activated account.</p>
+          <ul class="chk"><li>Aadhaar eKYC — OTP verification, auto-fills name, DOB, address</li><li>DigiLocker — digital document pull, no photo upload required</li><li>Video KYC — live video with SEBI-compliant recording</li><li>PAN verification — NSDL real-time validation</li><li>Bank account linking — penny drop verification</li><li>Demat account auto-creation via NSDL/CDSL</li></ul>
+          <a href="#cta" class="clearn">Watch the KYC flow</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="cv-t">KYC metrics — HDFC Sky</div><div class="cv-s">Live deployment</div></div></div>
+          <div class="mrow"><div class="mc"><div class="mcv r">&lt;2m</div><div class="mcl">E2E time</div></div><div class="mc"><div class="mcv g">100%</div><div class="mcl">Automated</div></div><div class="mc"><div class="mcv a">0</div><div class="mcl">Manual steps</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>End-to-end time</span><span>&lt;2 minutes</span></div><div class="ptr"><div class="pf" style="width:98%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Automation coverage</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>SEBI compliance</span><span>Full coverage</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="kyc-c-compliance" class="cpanel">
+        <div class="cp-text">
+          <h3>SEBI-compliant. <em>From day one.</em></h3>
+          <p>Built to meet every current SEBI KYC directive. KRA auto-upload, CKYC record creation via CERSAI, re-KYC workflows and complete audit trails — all included out of the box.</p>
+          <ul class="chk"><li>SEBI digital onboarding circular — fully covered</li><li>KRA record auto-uploaded on KYC completion</li><li>CKYC via CERSAI integration</li><li>Re-KYC reminder and renewal workflow</li><li>Full audit trail — device, IP, timestamp logged</li><li>AES-256 at rest, TLS 1.3 in transit</li></ul>
+          <a href="#cta" class="clearn">Talk to our compliance team</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="cv-t">Compliance coverage</div><div class="cv-s">SEBI + KRA + CKYC</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>SEBI directive coverage</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>KRA auto-upload</span><span>On completion</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Audit trail</span><span>100% complete</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="kyc-c-automation" class="cpanel">
+        <div class="cp-text">
+          <h3>Zero manual intervention. <em>Fully API-driven activation.</em></h3>
+          <p>The KYC vendor calls Tradelab's API on completion. The client is created instantly. The default RMS template is auto-assigned. No uploads, no approvals, no manual effort from your operations team.</p>
+          <ul class="chk"><li>API-triggered client creation on KYC completion</li><li>Instant account activation — no manual approval step</li><li>Default RMS template auto-assigned on creation</li><li>Manual fallback — back-office file upload if needed</li><li>Real-time status webhook to your system</li><li>Zero operations effort per new client</li></ul>
+          <a href="#cta" class="clearn">See the automation flow</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div><div><div class="cv-t">Automation level</div><div class="cv-s">Zero manual steps</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Manual steps required</span><span>Zero</span></div><div class="ptr"><div class="pf" style="width:2%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Auto RMS template</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Activation speed</span><span>Instant</span></div><div class="ptr"><div class="pf" style="width:99%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ent"><div class="ent-in">
+  <div class="ent-hdr">
+    <div class="eyebrow">Built for Indian compliance</div>
+    <h2 class="sec">Every verification step. <em>One connected flow.</em></h2>
+    <p class="sec-lead">All KYC components pre-integrated — no separate vendor contracts to manage for each step.</p>
+  </div>
+  <div class="ent-grid">
+    <div class="ec" data-n="01"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h4>Aadhaar eKYC + DigiLocker</h4><p>OTP-based Aadhaar verification auto-fills all fields. DigiLocker pulls documents digitally — no photos needed.</p><div class="ec-chips"><span class="cc">UIDAI</span><span class="cc">DigiLocker</span></div></div>
+    <div class="ec" data-n="02"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Video KYC (V-CIP)</h4><p>SEBI-compliant live video with agent. Automated recording, document capture and audit log generation.</p><div class="ec-chips"><span class="cc">SEBI V-CIP</span><span class="cc">Auto-logged</span></div></div>
+    <div class="ec" data-n="03"><div class="ec-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4>Bank Linking + NSDL/CDSL</h4><p>Penny drop bank verification and demat account auto-creation via NSDL or CDSL — all in the same session.</p><div class="ec-chips"><span class="cc">Penny drop</span><span class="cc">NSDL/CDSL</span></div></div>
+    <div class="ec" data-n="04"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><h4>KRA + CKYC Auto-upload</h4><p>KRA record and CKYC registration uploaded automatically on KYC completion. Re-KYC workflows included.</p><div class="ec-chips"><span class="cc">KRA auto</span><span class="cc">CERSAI</span></div></div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in"><h3>Explore related resources</h3><div class="rgrid">
+  <div class="rc"><span class="rtype">Case Study</span><h4>HDFC Sky: under 3-minute KYC enabling bank-to-fintech competition</h4><p>How HDFC Sky used Tradelab's KYC module to compete on activation speed with new-age discount brokers.</p><a href="#cta" class="rlink">Read the case study</a></div>
+  <div class="rc"><span class="rtype">Guide</span><h4>SEBI's digital onboarding requirements in 2026</h4><p>A plain-language guide to the current SEBI KYC directives and how to ensure full compliance.</p><a href="#cta" class="rlink">Read the guide</a></div>
+  <div class="rc"><span class="rtype">Article</span><h4>Why KYC drop-off kills broker growth — and how to fix it</h4><p>A 3-day KYC process loses 60%+ of applicants. The case for under-2-minute automated onboarding.</p><a href="#cta" class="rlink">Read the article</a></div>
+</div></div></section>
+</div><!-- end kyc -->
+
+<!-- ═══ EXCHANGE ═══ -->
+<div id="pp-exchange" class="pp">
+<section class="hero"><div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">Exchange</span><span class="h-badge-t">Optre · Blitz Engines</span></div>
+    <h1 class="hh">Exchange-grade matching engine.<br><em>Battle-tested at a national exchange.</em></h1>
+    <p class="h-lead">Nepal Stock Exchange runs on Tradelab's Optre engine today. A Singapore crypto exchange runs 24/7 on Blitz. These are not pilots — they are national-scale live deployments.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">Talk to our exchange team →</a><a href="mailto:info@tradelab.in" class="btn-g">See architecture</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val">NEPSE</div><div class="hs-lbl">National exchange live</div></div>
+      <div><div class="hs-val">Sub-ms</div><div class="hs-lbl">Matching latency</div></div>
+      <div><div class="hs-val">24/7</div><div class="hs-lbl">Crypto exchange live</div></div>
+      <div><div class="hs-val">99.9%+</div><div class="hs-lbl">Availability SLA</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">Exchange Infrastructure — Live</span><span class="pl">● All live</span></div>
+    <div class="metrics">
+      <div class="metric"><div class="mcv r">NEPSE</div><div class="mcl">Equities live</div></div>
+      <div class="metric"><div class="mcv a">SG</div><div class="mcl">Crypto 24/7</div></div>
+      <div class="metric"><div class="mcv g">99.9%</div><div class="mcl">Uptime</div></div>
+    </div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--red)"></div><div class="lrname">Optre Engine (Equities)</div><div class="lrstat">NEPSE · National exchange</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#D97706"></div><div class="lrname">Blitz Engine (Crypto)</div><div class="lrstat">Singapore · 24/7</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#8B5CF6"></div><div class="lrname">Clearing & Settlement</div><div class="lrstat">Automated</div><span class="lbr">Active</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">Regulatory Reporting</div><div class="lrstat">Built-in</div><span class="lbr">Active</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">Live deployments</span><div class="tstrip-logos"><span class="tchip">NEPSE — National Exchange of Nepal</span><span class="tchip">Singapore crypto exchange</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">Full exchange stack. <em>Proven at national scale.</em></h2>
+    <p class="sec-lead">Order matching, clearing, settlement, member management, surveillance and regulatory reporting — the complete exchange platform in one stack.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('exchange','matching',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Matching Engine</div>
+      <div class="ctab" onclick="SC('exchange','clearing',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Clearing & Settlement</div>
+      <div class="ctab" onclick="SC('exchange','crypto',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Crypto Exchange</div>
+    </div>
+    <div>
+      <div id="exchange-c-matching" class="cpanel act">
+        <div class="cp-text">
+          <h3>Sub-millisecond matching engine. <em>National-scale proven.</em></h3>
+          <p>Optre runs Nepal Stock Exchange — equities, indices, and derivatives. High-performance order matching with price-time priority. Full order book management, circuit breaker logic, and real-time trade reporting.</p>
+          <ul class="chk"><li>Sub-millisecond order matching latency</li><li>Price-time priority matching algorithm</li><li>Full order book depth management</li><li>Circuit breaker and volatility halt mechanisms</li><li>Real-time trade confirmation and reporting</li><li>Member terminal and market data feed included</li></ul>
+          <a href="#cta" class="clearn">See Optre architecture</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="cv-t">Optre Engine — NEPSE</div><div class="cv-s">National exchange · Live</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Matching latency</span><span>Sub-millisecond</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Uptime SLA</span><span>99.9%+</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Trade reporting</span><span>Real-time</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="exchange-c-clearing" class="cpanel">
+        <div class="cp-text">
+          <h3>Automated clearing and settlement. <em>Zero manual steps.</em></h3>
+          <p>Integrated clearing and settlement workflows. Depository connectivity, fund transfer automation, and margin call processing — all built into the same platform, not a third-party bolt-on.</p>
+          <ul class="chk"><li>T+1 and T+2 settlement cycles supported</li><li>Automated margin call calculation and processing</li><li>Depository interface — NSDL/CDSL or local equivalent</li><li>Fund transfer and pay-in/payout automation</li><li>Failed trade management and reconciliation</li><li>Custodian and clearing member interfaces</li></ul>
+          <a href="#cta" class="clearn">See clearing architecture</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="cv-t">Clearing & Settlement</div><div class="cv-s">Automated · Built-in</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Settlement automation</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Settlement cycles</span><span>T+1 and T+2</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="exchange-c-crypto" class="cpanel">
+        <div class="cp-text">
+          <h3>Crypto exchange engine. <em>24/7. High-volatility proven.</em></h3>
+          <p>Blitz runs a live crypto exchange in Singapore — 24/7, in high-volatility market conditions. Spot trading, digital wallet integration, order book management and full settlement built in.</p>
+          <ul class="chk"><li>24/7 operation — no scheduled downtime</li><li>Spot and derivatives trading support</li><li>Digital wallet integration — custodial and non-custodial</li><li>High-volatility circuit breaker and risk controls</li><li>AML/KYC workflow integration</li><li>Regulatory reporting for crypto jurisdiction</li></ul>
+          <a href="#cta" class="clearn">See Blitz architecture</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div><div class="cv-t">Blitz Engine — Singapore</div><div class="cv-s">Crypto · 24/7 live</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Availability</span><span>24/7 · 365</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Uptime SLA</span><span>99.9%+</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in"><h3>Explore related resources</h3><div class="rgrid">
+  <div class="rc"><span class="rtype">Case Study</span><h4>Nepal Stock Exchange: how a national exchange runs on Tradelab's matching engine</h4><p>National-scale equities deployment. Full regulatory reporting and settlement. Live in production.</p><a href="#cta" class="rlink">Read the case study</a></div>
+  <div class="rc"><span class="rtype">Guide</span><h4>Launching an exchange in 2026: what infrastructure you actually need</h4><p>Matching engine, clearing, settlement, member management — the complete infrastructure picture.</p><a href="#cta" class="rlink">Read the guide</a></div>
+  <div class="rc"><span class="rtype">Article</span><h4>Why latency matters in a live exchange: a CTO guide</h4><p>The practical difference between sub-millisecond and 5ms latency — and why it matters when volumes spike.</p><a href="#cta" class="rlink">Read the article</a></div>
+</div></div></section>
+</div><!-- end exchange -->
+
+<!-- ═══ CLOUD ═══ -->
+<div id="pp-cloud" class="pp">
+<section class="hero"><div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">Cloud</span><span class="h-badge-t">Infrastructure & Hosting</span></div>
+    <h1 class="hh">Kubernetes-ready. Zero-downtime deployments.<br><em>99.9% uptime SLA.</em></h1>
+    <p class="h-lead">Enterprise-grade cloud infrastructure built specifically for trading workloads. AWS Mumbai, 3 Availability Zones, AWS Direct Connect to exchanges, ISO 27001 certified, and a 24x7 monitoring team.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">See infrastructure overview →</a><a href="mailto:info@tradelab.in" class="btn-g">Talk to the team</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val">99.9<span class="r">%+</span></div><div class="hs-lbl">Uptime SLA</div></div>
+      <div><div class="hs-val">3-AZ</div><div class="hs-lbl">High availability</div></div>
+      <div><div class="hs-val">ISO 27001</div><div class="hs-lbl">Certified</div></div>
+      <div><div class="hs-val">AWS Mumbai</div><div class="hs-lbl">Primary region</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">Cloud Infrastructure Status</span><span class="pl">● All systems operational</span></div>
+    <div class="metrics">
+      <div class="metric"><div class="mcv g">99.9%</div><div class="mcl">Uptime</div></div>
+      <div class="metric"><div class="mcv r">3</div><div class="mcl">AZs active</div></div>
+      <div class="metric"><div class="mcv a">0</div><div class="mcl">Incidents</div></div>
+    </div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">EKS Cluster AZ-1 (Master DB)</div><div class="lrstat">Primary active</div><span class="lbg">Active</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">EKS Cluster AZ-2 (Standby)</div><div class="lrstat">Failover ready</div><span class="lbg">Ready</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">AWS Direct Connect</div><div class="lrstat">Exchange lines</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">WAF + DDoS Protection</div><div class="lrstat">AWS WAF active</div><span class="lbr">Active</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">Infrastructure powering</span><div class="tstrip-logos"><span class="tchip">HDFC Sky</span><span class="tchip">AliceBlue</span><span class="tchip">NEPSE</span><span class="tchip">20+ clients</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">Built for trading. <em>Not generic cloud.</em></h2>
+    <p class="sec-lead">Purpose-designed for the latency, compliance and availability requirements of SEBI-regulated trading operations.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('cloud','ha',this)"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>High Availability</div>
+      <div class="ctab" onclick="SC('cloud','security',this)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security</div>
+      <div class="ctab" onclick="SC('cloud','devops',this)"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>DevOps & CI/CD</div>
+    </div>
+    <div>
+      <div id="cloud-c-ha" class="cpanel act">
+        <div class="cp-text">
+          <h3>3-AZ high availability. <em>Zero single point of failure.</em></h3>
+          <p>AWS EKS across 3 Mumbai Availability Zones. Automatic failover, database replication across zones, and AWS Direct Connect for low-latency exchange connectivity — all configured and managed by Tradelab.</p>
+          <ul class="chk"><li>3 Availability Zones — Mumbai ap-south-1</li><li>Kubernetes EKS with auto-scaling node groups</li><li>PostgreSQL with synchronous standby replication</li><li>AWS Direct Connect — sub-ms exchange line</li><li>Redis in-memory cluster for real-time caching</li><li>Automatic failover — zero manual intervention</li></ul>
+          <a href="#cta" class="clearn">See infrastructure diagram</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></div><div><div class="cv-t">Infrastructure — all clients</div><div class="cv-s">AWS Mumbai · 3-AZ</div></div></div>
+          <div class="mrow"><div class="mc"><div class="mcv g">99.9%</div><div class="mcl">Uptime</div></div><div class="mc"><div class="mcv r">3</div><div class="mcl">AZs active</div></div><div class="mc"><div class="mcv a">0</div><div class="mcl">Incidents</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Availability SLA</span><span>99.9%+</span></div><div class="ptr"><div class="pf" style="width:99%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Failover speed</span><span>Automatic</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="cloud-c-security" class="cpanel">
+        <div class="cp-text">
+          <h3>ISO 27001 certified. <em>SEBI CSRF aligned.</em></h3>
+          <p>Tradelab's infrastructure is ISO 27001:2022 certified and aligned with SEBI's Cyber Security and Resilience Framework. Every layer — network, data, access, monitoring — is secured and audited.</p>
+          <ul class="chk"><li>ISO 27001:2022 — information security management</li><li>SEBI CSRF compliance — aligned framework</li><li>AWS WAF + DDoS protection on all endpoints</li><li>AES-256 at rest, TLS 1.3 in transit</li><li>RBAC, MFA, and IP whitelisting standard</li><li>VAPT annually by certified third-party</li></ul>
+          <a href="#cta" class="clearn">See security documentation</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="cv-t">Security posture</div><div class="cv-s">ISO 27001 + SEBI CSRF</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>ISO 27001 coverage</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>SEBI CSRF alignment</span><span>Fully aligned</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>VAPT frequency</span><span>Annual</span></div><div class="ptr"><div class="pf" style="width:100%;background:#D97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="cloud-c-devops" class="cpanel">
+        <div class="cp-text">
+          <h3>Zero-downtime deployments. <em>Automated rollback.</em></h3>
+          <p>Kubernetes rolling deployments with automated rollback on failure. Full CI/CD pipeline with staging environment and automated smoke tests before any production release.</p>
+          <ul class="chk"><li>Kubernetes rolling deployments — zero downtime</li><li>Automated rollback on health check failure</li><li>Staging environment mirrors production exactly</li><li>Automated smoke tests before every release</li><li>ELK stack — centralised logging and alerting</li><li>24x7 monitoring with SLA-backed incident response</li></ul>
+          <a href="#cta" class="clearn">See DevOps process</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/></svg></div><div><div class="cv-t">Deployment pipeline</div><div class="cv-s">Zero-downtime · Auto-rollback</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Deployment downtime</span><span>Zero</span></div><div class="ptr"><div class="pf" style="width:2%;background:var(--greendark)"></div></div></div>
+            <div><div class="prow-lbl"><span>Rollback speed</span><span>Automatic</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="security"><div class="sec-in">
+  <div class="sec-text"><div class="eyebrow">Security & Compliance</div><h2>Your infrastructure security is our priority.</h2><p>Every Tradelab cloud deployment meets ISO 27001:2022, ISO 9001:2015 and SEBI CSRF requirements. AES-256 encryption, TLS 1.3, RBAC, MFA and full audit trails included as standard.</p></div>
+  <div class="sbadges">
+    <div class="sbadge"><div class="sbadge-ico">🔐</div><div class="sbadge-n">ISO 27001:2022</div><div class="sbadge-d">Information security</div></div>
+    <div class="sbadge"><div class="sbadge-ico">✅</div><div class="sbadge-n">ISO 9001:2015</div><div class="sbadge-d">Quality management</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🏛️</div><div class="sbadge-n">SEBI CSRF</div><div class="sbadge-d">Cyber resilience</div></div>
+    <div class="sbadge"><div class="sbadge-ico">☁️</div><div class="sbadge-n">AWS Mumbai</div><div class="sbadge-d">3-AZ availability</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🔒</div><div class="sbadge-n">AES-256 + TLS 1.3</div><div class="sbadge-d">Encryption standard</div></div>
+    <div class="sbadge"><div class="sbadge-ico">🔍</div><div class="sbadge-n">VAPT Annual</div><div class="sbadge-d">Third-party tested</div></div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in"><h3>Explore related resources</h3><div class="rgrid">
+  <div class="rc"><span class="rtype">Guide</span><h4>Cloud infrastructure requirements for SEBI-registered brokers in 2026</h4><p>What SEBI CSRF requires from your infrastructure — and how to meet it without building from scratch.</p><a href="#cta" class="rlink">Read the guide</a></div>
+  <div class="rc"><span class="rtype">Article</span><h4>Why trading platforms need 3-AZ infra — not just redundancy</h4><p>The difference between "redundant" and "truly highly available" in a live trading context.</p><a href="#cta" class="rlink">Read the article</a></div>
+  <div class="rc"><span class="rtype">Guide</span><h4>ISO 27001 for brokers: what certification covers and how it helps</h4><p>What ISO 27001 means in practice for a trading platform and why institutional clients require it.</p><a href="#cta" class="rlink">Read the guide</a></div>
+</div></div></section>
+</div><!-- end cloud -->
+
+<!-- ═══ API ═══ -->
+<div id="pp-api" class="pp">
+<section class="hero"><div class="hero-in">
+  <div>
+    <div class="h-badge"><span class="h-badge-p">API</span><span class="h-badge-t">REST · WebSocket · FIX</span></div>
+    <h1 class="hh">REST, WebSocket and FIX.<br><em>Your engineers start on day one.</em></h1>
+    <p class="h-lead">Open APIs for every platform feature. OAuth 2.0 gateway, Postman-ready collections, sandbox with mock exchange connectivity. Integrates with exchanges, depositories, payment gateways and core banking.</p>
+    <div class="h-ctas"><a href="#cta" class="btn-r">Get sandbox access →</a><a href="mailto:info@tradelab.in" class="btn-g">View API docs</a></div>
+    <div class="h-stats">
+      <div><div class="hs-val">REST · WS · FIX</div><div class="hs-lbl">All protocols</div></div>
+      <div><div class="hs-val">OAuth 2.0</div><div class="hs-lbl">Auth standard</div></div>
+      <div><div class="hs-val">Sandbox</div><div class="hs-lbl">Available day one</div></div>
+      <div><div class="hs-val">12+</div><div class="hs-lbl">Integration types</div></div>
+    </div>
+  </div>
+  <div class="h-panel">
+    <div class="pc"><div class="pd pdr"></div><div class="pd pdy"></div><div class="pd pdg"></div><span class="pt">API Gateway — Live</span><span class="pl">● Live</span></div>
+    <div class="lrows">
+      <div class="lrow"><div class="lrdot" style="background:var(--red)"></div><div class="lrname">REST API</div><div class="lrstat">All features covered</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#185FA5"></div><div class="lrname">WebSocket (Octopus)</div><div class="lrstat">Real-time tick data</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:#8B5CF6"></div><div class="lrname">FIX Protocol</div><div class="lrstat">Exchange + core banking</div><span class="lbg">Live</span></div>
+      <div class="lrow"><div class="lrdot" style="background:var(--greendark)"></div><div class="lrname">Sandbox</div><div class="lrstat">Mock exchange ready</div><span class="lbr">Available</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="tstrip"><div class="tstrip-in"><span class="tstrip-lbl">API used by</span><div class="tstrip-logos"><span class="tchip">Zerodha</span><span class="tchip">HDFC Sky (TCS BaNCS FIX)</span><span class="tchip">20+ institutions</span></div></div></div>
+
+<section class="caps"><div class="caps-in">
+  <div class="cap-hdr">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="sec">Three protocols. One gateway. <em>Every use case covered.</em></h2>
+    <p class="sec-lead">REST for CRUD operations, WebSocket for real-time feeds, FIX for institutional and exchange connectivity — and a sandbox to start building before you sign.</p>
+  </div>
+  <div class="cap-body">
+    <div class="ctabs">
+      <div class="ctab act" onclick="SC('api','rest',this)"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>REST API</div>
+      <div class="ctab" onclick="SC('api','ws',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>WebSocket</div>
+      <div class="ctab" onclick="SC('api','fix',this)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>FIX Protocol</div>
+      <div class="ctab" onclick="SC('api','sandbox',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Sandbox</div>
+    </div>
+    <div>
+      <div id="api-c-rest" class="cpanel act">
+        <div class="cp-text">
+          <h3>REST API. <em>Every platform feature exposed.</em></h3>
+          <p>A complete REST API covering orders, positions, funds, clients, watchlists and reports. OAuth 2.0 authentication, IP whitelisting, rotating API keys and rate limiting built into the gateway.</p>
+          <ul class="chk"><li>OAuth 2.0 secure authentication gateway</li><li>Complete endpoint coverage — every platform feature</li><li>IP whitelisting and rotating API keys</li><li>Rate limiting with burst allowances</li><li>HMAC webhook verification for callbacks</li><li>Postman collection and developer SDK included</li></ul>
+          <a href="#cta" class="clearn">Get API access</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/></svg></div><div><div class="cv-t">REST API coverage</div><div class="cv-s">All features · OAuth 2.0</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Feature coverage</span><span>100%</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Authentication</span><span>OAuth 2.0</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="api-c-ws" class="cpanel">
+        <div class="cp-text">
+          <h3>WebSocket (Octopus). <em>Real-time tick data.</em></h3>
+          <p>Octopus WebSocket server streams real-time tick-by-tick market data, order updates, position changes and fund movements to connected clients. Persistent connection, automatic reconnection logic included.</p>
+          <ul class="chk"><li>Real-time tick-by-tick market data feed</li><li>Order update events — filled, partial, cancelled</li><li>Position and fund change notifications</li><li>Persistent WebSocket connection management</li><li>Automatic reconnection with backoff</li><li>Supports 10,000+ concurrent connections</li></ul>
+          <a href="#cta" class="clearn">See WebSocket docs</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="cv-t">Octopus WebSocket</div><div class="cv-s">Real-time · Persistent</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Concurrent connections</span><span>10,000+</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Feed latency</span><span>Real-time</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="api-c-fix" class="cpanel">
+        <div class="cp-text">
+          <h3>FIX protocol. <em>Institutional and exchange connectivity.</em></h3>
+          <p>FIX 4.2 and 4.4 for exchange adapters and institutional counterparty connectivity. HDFC Sky uses FIX to connect TCS BaNCS core banking with Tradelab OMS. Algo trading desks connect directly via FIX.</p>
+          <ul class="chk"><li>FIX 4.2 and FIX 4.4 supported</li><li>Exchange adapter connectivity — NSE, BSE, MCX</li><li>Core banking integration via FIX (TCS BaNCS, Finacle)</li><li>Algo trading desk direct connectivity</li><li>FIX session management and heartbeat monitoring</li><li>Full FIX message log for audit and debugging</li></ul>
+          <a href="#cta" class="clearn">See FIX integration guide</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/></svg></div><div><div class="cv-t">FIX connectivity</div><div class="cv-s">Exchange + CBS live</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Exchange adapters</span><span>NSE+BSE+MCX</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Core banking</span><span>TCS BaNCS · Finacle</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="api-c-sandbox" class="cpanel">
+        <div class="cp-text">
+          <h3>Sandbox environment. <em>Start building before you sign.</em></h3>
+          <p>A dedicated sandbox environment with mock exchange connectivity. Place test orders, receive simulated fills, test WebSocket feeds — all before a single line goes near production. Postman collections and developer SDKs included from day one.</p>
+          <ul class="chk"><li>Dedicated sandbox tenant — isolated from production</li><li>Mock exchange connectivity — simulated fills</li><li>Full WebSocket feed in sandbox mode</li><li>Postman collection — pre-built for all endpoints</li><li>Developer SDK — JavaScript and Python</li><li>Available immediately on request</li></ul>
+          <a href="#cta" class="clearn">Request sandbox access</a>
+        </div>
+        <div class="cp-vis">
+          <div class="cv-hdr"><div class="cv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><div><div class="cv-t">Sandbox environment</div><div class="cv-s">Mock exchange · Day one</div></div></div>
+          <div class="prows">
+            <div><div class="prow-lbl"><span>Time to sandbox</span><span>Same business day</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--red)"></div></div></div>
+            <div><div class="prow-lbl"><span>Mock exchange coverage</span><span>NSE+BSE+MCX</span></div><div class="ptr"><div class="pf" style="width:100%;background:var(--greendark)"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ent"><div class="ent-in">
+  <div class="ent-hdr">
+    <div class="eyebrow">Integration ecosystem</div>
+    <h2 class="sec">Connects to everything <em>your stack needs.</em></h2>
+    <p class="sec-lead">Pre-built integrations with exchanges, depositories, payment gateways, KYC vendors and core banking systems — all live in production.</p>
+  </div>
+  <div class="ent-grid">
+    <div class="ec" data-n="01"><div class="ec-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/></svg></div><h4>REST + WebSocket + FIX</h4><p>Complete API coverage across all three protocols. FIX 4.2/4.4 for institutional and exchange connectivity.</p><div class="ec-chips"><span class="cc">REST</span><span class="cc">WebSocket</span><span class="cc">FIX</span></div></div>
+    <div class="ec" data-n="02"><div class="ec-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h4>OAuth 2.0 Security</h4><p>Secure gateway with IP whitelisting, rotating keys, rate limiting and HMAC webhook verification.</p><div class="ec-chips"><span class="cc">OAuth 2.0</span><span class="cc">IP whitelist</span></div></div>
+    <div class="ec" data-n="03"><div class="ec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><h4>Exchange + Depository</h4><p>NSE, BSE, MCX adapters. NSDL and CDSL for ePledge, EDIS and allocation. All live in production.</p><div class="ec-chips"><span class="cc">NSE+BSE+MCX</span><span class="cc">NSDL+CDSL</span></div></div>
+    <div class="ec" data-n="04"><div class="ec-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><h4>Core Banking + KYC</h4><p>TCS BaNCS and Finacle via FIX. Aadhaar, NSDL, DigiLocker, CERSAI and payment gateway integrations ready.</p><div class="ec-chips"><span class="cc">TCS BaNCS</span><span class="cc">Finacle</span><span class="cc">Aadhaar</span></div></div>
+  </div>
+</div></section>
+
+<section class="resources"><div class="resources-in"><h3>Explore related resources</h3><div class="rgrid">
+  <div class="rc"><span class="rtype">Guide</span><h4>Tradelab API integration guide for broker engineering teams</h4><p>Getting started with REST, WebSocket and FIX — from sandbox setup to production in a structured workflow.</p><a href="#cta" class="rlink">Request access</a></div>
+  <div class="rc"><span class="rtype">Case Study</span><h4>HDFC Sky: TCS BaNCS to Tradelab OMS via FIX in under 8 weeks</h4><p>How HDFC Securities connected core banking to Tradelab OMS using FIX protocol in a phased integration.</p><a href="#cta" class="rlink">Read the case study</a></div>
+  <div class="rc"><span class="rtype">Article</span><h4>REST vs WebSocket vs FIX: which API your broker stack needs</h4><p>When to use each protocol — and how Tradelab's API layer supports all three simultaneously.</p><a href="#cta" class="rlink">Read the article</a></div>
+</div></div></section>
+</div><!-- end api -->
+
+<!-- ═══ SHARED CTA BANNER ═══ -->
+<div id="cta" class="cta-ban">
+  <div class="cta-ban-in">
+    <div class="cta-ban-logo">TRADELAB</div>
+    <h2>See Tradelab <em>in your stack</em></h2>
+    <p>30-minute technical demo. No slides. We walk through the actual product against your specific use case — OMS, trading UI, KYC, exchange or API.</p>
+    <div class="cta-btns">
+      <a href="mailto:info@tradelab.in" class="btn-r">Book a Demo →</a>
+      <a href="mailto:info@tradelab.in" class="btn-lt">Talk to Sales</a>
+    </div>
+    <div class="cta-trust">
+      <span class="cti">Zerodha</span><span class="cti">HDFC Sky</span><span class="cti">AliceBlue</span>
+      <span class="cti">NEPSE</span><span class="cti">ISO 27001</span><span class="cti">20+ live clients</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="ft-brand"><div class="ft-brand-n">tradelab</div><p>Building trading infrastructure for India's brokers, banks and exchanges since 2012. ISO 9001 &amp; ISO 27001 certified. Founded by Biplab Sinha, IIT Kharagpur.</p></div>
+      <div class="ft-col"><h5>Platform</h5><ul><li><a href="#">OMS &amp; Risk Management</a></li><li><a href="#">Trading Platform</a></li><li><a href="#">KYC &amp; Onboarding</a></li><li><a href="#">Exchange Infrastructure</a></li><li><a href="#">Cloud Services</a></li><li><a href="#">API &amp; Integrations</a></li></ul></div>
+      <div class="ft-col"><h5>Solutions</h5><ul><li><a href="#">For Brokers</a></li><li><a href="#">For Banks</a></li><li><a href="#">For Exchanges</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul><li><a href="#">About Tradelab</a></li><li><a href="#">Careers</a></li><li><a href="mailto:info@tradelab.in">info@tradelab.in</a></li><li><a href="tel:+918088422700">+91 80884 22700</a></li></ul></div>
+    </div>
+    <div class="ft-bot">
+      <p>&copy; 2026 Tradelab Technologies Pvt Ltd &middot; CIN: U72200WB2012PTC184065 &middot; Made in India</p>
+      <div class="ft-certs"><span class="fc">ISO 9001</span><span class="fc">ISO 27001</span></div>
+    </div>
+  </div>
+</footer>
+
+<div class="sbar" id="sbar">
+  <p><strong>See Tradelab in your stack</strong> — 30-min technical demo, no slides.</p>
+  <div class="sbar-btns">
+    <button class="sbar-o" onclick="window.location='mailto:info@tradelab.in'">Talk to Sales</button>
+    <button class="sbar-w" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Book a Demo →</button>
+  </div>
+</div>
+
+<script>
+function SP(id,el){
+  document.querySelectorAll('.pp').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.snav').forEach(s=>s.classList.remove('act'));
+  document.getElementById('pp-'+id).classList.add('act');
+  el.classList.add('act');
+  const sn=document.querySelector('.subnav');
+  window.scrollTo({top:sn.offsetTop-70,behavior:'smooth'});
+}
+function SC(prod,tab,btn){
+  const pg=document.getElementById('pp-'+prod);
+  pg.querySelectorAll('.ctab').forEach(t=>t.classList.remove('act'));
+  pg.querySelectorAll('.cpanel').forEach(p=>p.classList.remove('act'));
+  btn.classList.add('act');
+  const p=document.getElementById(prod+'-c-'+tab);
+  if(p)p.classList.add('act');
+}
+function ST(prod,key,btn){
+  const pg=document.getElementById('pp-'+prod);
+  pg.querySelectorAll('.ttab').forEach(t=>t.classList.remove('act'));
+  pg.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('act'));
+  btn.classList.add('act');
+  const p=document.getElementById(prod+'-t-'+key);
+  if(p)p.classList.add('act');
+}
+// sticky bar
+const bar=document.getElementById('sbar');
+const nav=document.querySelector('.nav');
+new IntersectionObserver(([e])=>{bar.style.display=e.isIntersecting?'none':'flex'},{threshold:0}).observe(nav);
+</script>
+</body>
+</html>
